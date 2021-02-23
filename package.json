@@ -10,7 +10,7 @@
   },
   "private": true,
   "devDependencies": {
-    "truffle": "^5.1.66"
+    "truffle": "5.1.65"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.4.0"
