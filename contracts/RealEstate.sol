@@ -8,13 +8,15 @@ contract RealEstate is ERC721 {
   using Counters for Counters.Counter;
 
   address public owner;
+
   Counters.Counter private _tokenIds;
+  mapping(string => bool) private hashes;
 
   constructor() ERC721("Real Estate", "RST") public {
     owner = msg.sender;
   }
 
-  function listAllTokens() external view returns(uint[] memory) {
+  function allTokens() external view returns(uint[] memory) {
     uint nTokens = totalSupply();
     uint[] memory tokens = new uint[](nTokens);
     for (uint i = 0; i < nTokens; i++) {
@@ -23,11 +25,13 @@ contract RealEstate is ERC721 {
     return tokens;
   }
 
-  function mint(string calldata _tokenUri) external returns (uint) {
+  function mint(string memory _tokenURI) external returns (uint) {
+    require(hashes[_tokenURI] != true);
+    hashes[_tokenURI] = true;
     _tokenIds.increment();
     uint newItemId = _tokenIds.current();
     _mint(msg.sender, newItemId);
-    _setTokenURI(newItemId, _tokenUri);
+    _setTokenURI(newItemId, _tokenURI);
     return newItemId;
   }
 }

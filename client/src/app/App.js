@@ -1,6 +1,8 @@
 import { useDrizzle } from '../drizzle';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import AddPage from '../add/AddPage';
+import HomePage from '../home/HomePage';
 
 function App() {
   const { initialized } = useDrizzle();
@@ -17,7 +19,11 @@ function App() {
   }
 
   return (
-    <AddPage />
+    <Switch>
+      <Route path="/" exact component={HomePage} />
+      <Route path="/add-token" exact component={AddPage} />
+      <Redirect to="/" />
+    </Switch>
   );
 }
 
