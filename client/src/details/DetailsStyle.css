@@ -1,0 +1,11 @@
+.detailsContainer{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+.detailsInformations{
+    width: 45vw;
+}
+.description{
+    font-size: small;
+}

@@ -1,6 +1,7 @@
 import { useDrizzle } from '../drizzle';
 import Loader from 'react-loader-spinner';
 import AddPage from '../add/AddPage';
+import DetailsPage from '../details/DetailsPage';
 
 function App() {
   const { initialized } = useDrizzle();
@@ -17,7 +18,7 @@ function App() {
   }
 
   return (
-    <AddPage />
+    <DetailsPage />
   );
 }
 
