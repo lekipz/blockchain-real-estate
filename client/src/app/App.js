@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import AddPage from '../add/AddPage';
 import HomePage from '../home/HomePage';
+import ProductListPage from '../productList/ProductListPage';
 
 function App() {
   const { initialized } = useDrizzle();
@@ -22,6 +23,7 @@ function App() {
     <Switch>
       <Route path="/" exact component={HomePage} />
       <Route path="/add-token" exact component={AddPage} />
+      <Route path="/products" exact component={ProductListPage}></Route>
       <Redirect to="/" />
     </Switch>
   );
