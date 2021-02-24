@@ -1,6 +1,8 @@
+import classes from './cssModules/RealEstatePreview.module.css'
+
 export default function RealEstatePreview({ realEstate }) {
   return (
-    <div>
+    <div className={classes.realEstatePreview}>
       <p>Nom: {realEstate.name}</p>
       <p>Description: {realEstate.description}</p>
       <p>Prix: {realEstate.price}</p>

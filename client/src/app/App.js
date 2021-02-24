@@ -23,7 +23,7 @@ function App() {
     <Switch>
       <Route path="/" exact component={HomePage} />
       <Route path="/add-token" exact component={AddPage} />
-      <Route path="/products" exact component={RealEstateListPage}/>
+      <Route path="/real-estate" exact component={RealEstateListPage}/>
       <Redirect to="/" />
     </Switch>
   );

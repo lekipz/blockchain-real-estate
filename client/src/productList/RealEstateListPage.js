@@ -3,8 +3,7 @@ import RealEstatePreview from "./RealEstatePreview";
 
 export default function RealEstateListPage() {
 
-  const getRealEstateList = () => {
-    return [
+  const REAL_ESTATES = [
       {
         tokenId: 1,
         name: 'Le uc de Raumé',
@@ -104,15 +103,14 @@ export default function RealEstateListPage() {
         images: ['https://img.pokemondb.net/artwork/large/magikarp.jpg'],
         onSale: true
       }
-    ]
-  }
+  ]
 
-  const [realEstateList, setRealEstateList] = useState(getRealEstateList())
+  const [realEstateList, setRealEstateList] = useState(REAL_ESTATES)
 
   return (
     <div className="flex flex-wrap flex-col items-center">
       <h1 className="text-5xl font-bold mt-14">BIENS EN VENTE</h1>
-      <div className="flex flex-wrap mt-28">
+      <div className="flex flex-wrap justify-center mt-28 m-72">
         {realEstateList.map((realEstate) => (<RealEstatePreview realEstate={realEstate} key={realEstate.tokenId}/>))}
       </div>
     </div>
