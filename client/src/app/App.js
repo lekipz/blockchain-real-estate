@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import AddPage from '../add/AddPage';
 import HomePage from '../home/HomePage';
-import ProductListPage from '../productList/ProductListPage';
+import ProductListPage from '../productList/RealEstateListPage';
 
 function App() {
   const { initialized } = useDrizzle();
