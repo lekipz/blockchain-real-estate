@@ -21,13 +21,17 @@ export default function AddForm({onAdd, loading}) {
   }));
   const [showError, setShowError] = useState(false);
   const handleSubmit = async (e) => {
-    setShowError(false);
     e.preventDefault();
-    if (!isFormValid(formValues)) {
+    setShowError(false);
+    const values = {
+      ...formValues,
+      price: +(formValues.price.replace(',', '.'))
+    };
+    if (!isFormValid(values)) {
       setShowError(true);
       return;
     }
-    await onAdd(formValues);
+    await onAdd(values);
   };
   const handleFilesChanged = files => {
     if (files && files.length > 0) {
