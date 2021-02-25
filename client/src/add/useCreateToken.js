@@ -4,7 +4,7 @@ import { uploadMetadataFile } from './resource';
 import { useState } from 'react';
 
 export function useCreateToken() {
-  const { drizzleState } = useDrizzle();
+  const { drizzle, drizzleState } = useDrizzle();
   const [uploadStatus, setUploadStatus] = useState('idle');
   const {
     sendTransaction: mint,
@@ -17,7 +17,8 @@ export function useCreateToken() {
       ...values,
       files: values.picturesData.map(({ blob }) => blob)
     });
-    mint(metadataHash, { from: drizzleState.accounts[0] });
+
+    mint(metadataHash, drizzle.web3.utils.toWei(values.ethPrice), { from: drizzleState.accounts[0] });
   };
 
   return {
