@@ -17,7 +17,7 @@ contract RealEstate is ERC721 {
   address public owner;
 
   // Maps token ID with its associated data
-  mapping(uint => RealEstate) public tokens;
+  mapping(uint => RealEstate) private _tokens;
 
   Counters.Counter private _tokenIds;
 
@@ -27,7 +27,7 @@ contract RealEstate is ERC721 {
 
   function tokenDataOf(uint _tokenId) external view returns (RealEstate memory) {
     require(_exists(_tokenId), 'Token does not exist.');
-    return tokens[_tokenId];
+    return _tokens[_tokenId];
   }
 
   function mint(string memory _tokenURI, uint _weiPrice) external returns (uint) {
@@ -35,7 +35,7 @@ contract RealEstate is ERC721 {
     uint newItemId = _tokenIds.current();
     _mint(msg.sender, newItemId);
     _setTokenURI(newItemId, _tokenURI);
-    tokens[newItemId] = RealEstate(true, _weiPrice);
+    _tokens[newItemId] = RealEstate(true, _weiPrice);
     return newItemId;
   }
 }
