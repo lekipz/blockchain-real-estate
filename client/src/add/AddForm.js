@@ -25,7 +25,8 @@ export default function AddForm({onAdd, loading}) {
     setShowError(false);
     const values = {
       ...formValues,
-      price: +(formValues.price.replace(',', '.'))
+      price: +(formValues.price.replace(',', '.')),
+      onSale: true
     };
     if (!isFormValid(values)) {
       setShowError(true);
