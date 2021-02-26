@@ -1,8 +1,9 @@
 import { useDrizzle } from '../drizzle';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import AddPage from '../add/AddPage';
 import HomePage from '../home/HomePage';
+import RealEstatesProvider from '../real-estates';
 
 function App() {
   const { initialized } = useDrizzle();
@@ -19,11 +20,13 @@ function App() {
   }
 
   return (
-    <Switch>
-      <Route path="/" exact component={HomePage} />
-      <Route path="/real-estates/add" exact component={AddPage} />
-      <Redirect to="/" />
-    </Switch>
+    <RealEstatesProvider>
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/real-estates/add" exact component={AddPage} />
+        <Redirect to="/" />
+      </Switch>
+    </RealEstatesProvider>
   );
 }
 
