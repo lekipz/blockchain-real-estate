@@ -5,16 +5,16 @@ pragma abicoder v2;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract RealEstate is ERC721 {
+contract SupRealEstate is ERC721 {
   using Counters for Counters.Counter;
+
+  address payable public owner;
 
   // Token data stored on the blockchain
   struct RealEstate {
     bool onSale;
     uint weiPrice;
   }
-
-  address public owner;
 
   // Maps token ID with its associated data
   mapping(uint => RealEstate) private _tokens;
@@ -37,5 +37,18 @@ contract RealEstate is ERC721 {
     _setTokenURI(newItemId, _tokenURI);
     _tokens[newItemId] = RealEstate(true, _weiPrice);
     return newItemId;
+  }
+
+  function buy(uint _tokenId) external payable {
+    require(_exists(_tokenId), 'Token does not exists.');
+    require(ownerOf(_tokenId) != msg.sender, 'Token already owned.');
+    require(_tokens[_tokenId].onSale == true, 'Token is not for sale.');
+    require(msg.value >= _tokens[_tokenId].weiPrice, 'Not enough ETH has been sent.');
+
+    address payable tokenOwner = payable(ownerOf(_tokenId));
+    tokenOwner.transfer((msg.value * 90) / 100);
+
+    _safeTransfer(tokenOwner, msg.sender, _tokenId, "");
+    _tokens[_tokenId].onSale = false;
   }
 }
