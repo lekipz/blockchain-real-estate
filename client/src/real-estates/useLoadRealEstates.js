@@ -33,7 +33,7 @@ export function useLoadRealEstates() {
         .fill(null)
         .map((_, idx) => drizzle.contracts.SupRealEstate.methods.tokenByIndex.cacheCall(idx));
       setTokenKeys(tk);
-      if (realEstates.length === 0) {
+      if (realEstates.length === 0 && totalSupply > 0) {
         setRealEstates(Array(totalSupply).fill(null));
       }
     }
@@ -101,7 +101,7 @@ export function useLoadRealEstates() {
 
   return !totalSupply ? null : realEstates.map((re, idx) => ({
     ...re,
-    price: tokenData[idx] ? drizzle.web3.utils.fromWei(tokenData[idx].weiPrice) : null,
+    price: tokenData[idx] ? +drizzle.web3.utils.fromWei(tokenData[idx].weiPrice) : null,
     onSale: tokenData[idx]?.onSale ?? false
   }));
 }
