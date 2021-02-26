@@ -1,5 +1,5 @@
-const RealEstate = artifacts.require("RealEstate");
+const SupRealEstate = artifacts.require("SupRealEstate");
 
 module.exports = function (deployer) {
-  deployer.deploy(RealEstate);
+  deployer.deploy(SupRealEstate);
 };

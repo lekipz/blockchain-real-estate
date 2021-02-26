@@ -15,29 +15,29 @@ export function useLoadRealEstates() {
   const [realEstates, setRealEstates] = useState([]);
 
   const tokenIds = useMemo(() => {
-    return tokenKeys.map(tokenKey => drizzleState.contracts.RealEstate.tokenByIndex[tokenKey]?.value ?? null);
-  }, [tokenKeys, drizzleState.contracts.RealEstate.tokenByIndex]);
+    return tokenKeys.map(tokenKey => drizzleState.contracts.SupRealEstate.tokenByIndex[tokenKey]?.value ?? null);
+  }, [tokenKeys, drizzleState.contracts.SupRealEstate.tokenByIndex]);
 
   const tokenURIs = useMemo(() => {
-    return tokenURIKeys.map(tokenURIKey => drizzleState.contracts.RealEstate.tokenURI[tokenURIKey]?.value ?? null);
-  }, [tokenURIKeys, drizzleState.contracts.RealEstate.tokenURI]);
+    return tokenURIKeys.map(tokenURIKey => drizzleState.contracts.SupRealEstate.tokenURI[tokenURIKey]?.value ?? null);
+  }, [tokenURIKeys, drizzleState.contracts.SupRealEstate.tokenURI]);
 
   const tokenData = useMemo(() => {
-    return tokenDataKeys.map(tokenDataKey => drizzleState.contracts.RealEstate.tokenDataOf[tokenDataKey]?.value ?? null);
-  }, [tokenDataKeys, drizzleState.contracts.RealEstate.tokenDataOf]);
+    return tokenDataKeys.map(tokenDataKey => drizzleState.contracts.SupRealEstate.tokenDataOf[tokenDataKey]?.value ?? null);
+  }, [tokenDataKeys, drizzleState.contracts.SupRealEstate.tokenDataOf]);
 
   // Load token IDs when totalSupply is defined.
   useEffect(() => {
     if (totalSupply !== null) {
       const tk = Array(+totalSupply)
         .fill(null)
-        .map((_, idx) => drizzle.contracts.RealEstate.methods.tokenByIndex.cacheCall(idx));
+        .map((_, idx) => drizzle.contracts.SupRealEstate.methods.tokenByIndex.cacheCall(idx));
       setTokenKeys(tk);
-      if (realEstates.length === 0) {
+      if (realEstates.length === 0 && totalSupply > 0) {
         setRealEstates(Array(totalSupply).fill(null));
       }
     }
-  }, [totalSupply, drizzle.contracts.RealEstate.methods.tokenByIndex]);
+  }, [totalSupply, drizzle.contracts.SupRealEstate.methods.tokenByIndex]);
 
   // Load token URIs for each token ID
   useEffect(() => {
@@ -46,11 +46,11 @@ export function useLoadRealEstates() {
         if (tokenId === null) {
           return null;
         }
-        return tokenURIKeys[idx] ?? drizzle.contracts.RealEstate.methods.tokenURI.cacheCall(tokenId);
+        return tokenURIKeys[idx] ?? drizzle.contracts.SupRealEstate.methods.tokenURI.cacheCall(tokenId);
       });
       setTokenURIKeys(tk);
     }
-  }, [tokenIds, drizzle.contracts.RealEstate.methods.tokenURI]);
+  }, [tokenIds, drizzle.contracts.SupRealEstate.methods.tokenURI]);
 
   // Load token data for each token ID
   useEffect(() => {
@@ -59,11 +59,11 @@ export function useLoadRealEstates() {
         if (tokenId === null) {
           return null;
         }
-        return tokenDataKeys[idx] ?? drizzle.contracts.RealEstate.methods.tokenDataOf.cacheCall(tokenId);
+        return tokenDataKeys[idx] ?? drizzle.contracts.SupRealEstate.methods.tokenDataOf.cacheCall(tokenId);
       });
       setTokenDataKeys(tk);
     }
-  }, [tokenIds, drizzle.contracts.RealEstate.methods.tokenDataOf]);
+  }, [tokenIds, drizzle.contracts.SupRealEstate.methods.tokenDataOf]);
 
   // Load JSON metadata
   useEffect(() => {
@@ -101,7 +101,7 @@ export function useLoadRealEstates() {
 
   return !totalSupply ? null : realEstates.map((re, idx) => ({
     ...re,
-    price: tokenData[idx] ? drizzle.web3.utils.fromWei(tokenData[idx].weiPrice) : null,
+    price: tokenData[idx] ? +drizzle.web3.utils.fromWei(tokenData[idx].weiPrice) : null,
     onSale: tokenData[idx]?.onSale ?? false
   }));
 }
