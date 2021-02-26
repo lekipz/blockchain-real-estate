@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.6.0 <0.8.0;
+pragma abicoder v2;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
@@ -9,24 +10,24 @@ contract SupRealEstate is ERC721 {
 
   address payable public owner;
 
-  Counters.Counter private _tokenIds;
+  // Token data stored on the blockchain
   struct RealEstate {
     bool onSale;
     uint weiPrice;
   }
+
+  // Maps token ID with its associated data
   mapping(uint => RealEstate) private _tokens;
 
-  constructor() ERC721("Real Estate", "RST") public {
+  Counters.Counter private _tokenIds;
+
+  constructor() ERC721("Real Estate", "RST") {
     owner = msg.sender;
   }
 
-  function allTokens() external view returns(uint[] memory) {
-    uint nTokens = totalSupply();
-    uint[] memory tokens = new uint[](nTokens);
-    for (uint i = 0; i < nTokens; i++) {
-      tokens[i] = tokenByIndex(i);
-    }
-    return tokens;
+  function tokenDataOf(uint _tokenId) external view returns (RealEstate memory) {
+    require(_exists(_tokenId), 'Token does not exist.');
+    return _tokens[_tokenId];
   }
 
   function mint(string memory _tokenURI, uint _weiPrice) external returns (uint) {
