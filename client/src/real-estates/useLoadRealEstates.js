@@ -11,6 +11,7 @@ export function useLoadRealEstates() {
   const [tokenKeys, setTokenKeys] = useState([]);
   const [tokenURIKeys, setTokenURIKeys] = useState([]);
   const [tokenDataKeys, setTokenDataKeys] = useState([]);
+  const [tokenOwnerKeys, setTokenOwnerKeys] = useState([]);
   const [realEstatePromises, setRealEstatePromises] = useState([]);
   const [realEstates, setRealEstates] = useState([]);
 
@@ -25,6 +26,10 @@ export function useLoadRealEstates() {
   const tokenData = useMemo(() => {
     return tokenDataKeys.map(tokenDataKey => drizzleState.contracts.SupRealEstate.tokenDataOf[tokenDataKey]?.value ?? null);
   }, [tokenDataKeys, drizzleState.contracts.SupRealEstate.tokenDataOf]);
+
+  const areTokensOwned = useMemo(() => {
+    return tokenOwnerKeys.map(tokenOwnerKey => drizzleState.contracts.SupRealEstate.ownerOf[tokenOwnerKey]?.value === drizzleState.accounts[0]);
+  }, [tokenOwnerKeys, drizzleState.contracts.SupRealEstate.ownerOf]);
 
   // Load token IDs when totalSupply is defined.
   useEffect(() => {
@@ -65,6 +70,19 @@ export function useLoadRealEstates() {
     }
   }, [tokenIds, drizzle.contracts.SupRealEstate.methods.tokenDataOf]);
 
+  // Load token owner for each token ID
+  useEffect(() => {
+    if (tokenIds.length > 0) {
+      const tk = tokenIds.map((tokenId, idx) => {
+        if (tokenId === null) {
+          return null;
+        }
+        return tokenOwnerKeys[idx] ?? drizzle.contracts.SupRealEstate.methods.ownerOf.cacheCall(tokenId);
+      });
+      setTokenOwnerKeys(tk);
+    }
+  }, [tokenIds, drizzle.contracts.SupRealEstate.methods.ownerOf]);
+
   // Load JSON metadata
   useEffect(() => {
     if (tokenURIs.length > 0) {
@@ -102,6 +120,7 @@ export function useLoadRealEstates() {
   return !totalSupply ? null : realEstates.map((re, idx) => ({
     ...re,
     price: tokenData[idx] ? +drizzle.web3.utils.fromWei(tokenData[idx].weiPrice) : null,
-    onSale: tokenData[idx]?.onSale ?? false
+    onSale: tokenData[idx]?.onSale ?? false,
+    isOwned: areTokensOwned[idx] ?? false
   }));
 }
