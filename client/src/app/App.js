@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import AddPage from '../add/AddPage';
 import HomePage from '../home/HomePage';
-import RealEstateListPage from '../productList/RealEstateListPage';
+import RealEstateListPage from '../realEstateList/RealEstateListPage';
 
 function App() {
   const { initialized } = useDrizzle();
@@ -23,7 +23,7 @@ function App() {
     <Switch>
       <Route path="/" exact component={HomePage} />
       <Route path="/add-token" exact component={AddPage} />
-      <Route path="/real-estate" exact component={RealEstateListPage}/>
+      <Route path="/real-estates" exact component={RealEstateListPage}/>
       <Redirect to="/" />
     </Switch>
   );
