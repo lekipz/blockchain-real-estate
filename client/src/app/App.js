@@ -4,6 +4,7 @@ import Loader from 'react-loader-spinner';
 import AddPage from '../add/AddPage';
 import HomePage from '../home/HomePage';
 import RealEstatesProvider from '../real-estates';
+import Navbar from '../navbar/Navbar';
 import RealEstateListPage from '../realEstateList/RealEstateListPage';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <RealEstatesProvider>
+      <Navbar />
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/real-estates/add" exact component={AddPage} />

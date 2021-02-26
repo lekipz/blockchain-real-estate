@@ -1,6 +1,10 @@
 @layer components {
   .realEstatePreview {
-    @apply border-2 border-solid border-blue-400 rounded m-5 p-5 w-1/5 bg-blue-50 cursor-pointer flex flex-col justify-between;
+    @apply border-2 border-solid border-blue-400 rounded m-5 p-5 bg-blue-50 cursor-pointer flex flex-col justify-between;
+    height: 30rem;
+  }
+  .realEstatePreviewLoading {
+    @apply border-2 border-solid border-blue-400 rounded m-5 p-5 bg-blue-50 cursor-pointer flex flex-col justify-center;
     height: 30rem;
   }
 }

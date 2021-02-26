@@ -6,7 +6,6 @@ export default function RealEstateListPage() {
   const realEstates = useRealEstates();
 
   if(realEstates) {
-    console.log(realEstates)
     return (
       <div className="flex flex-wrap flex-col items-center">
         <h1 className="text-5xl font-bold mt-14">BIENS EN VENTE</h1>

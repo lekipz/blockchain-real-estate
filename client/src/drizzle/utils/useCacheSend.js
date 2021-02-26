@@ -9,9 +9,9 @@ export function useCacheSend(method) {
 
   useEffect(() => {
     if (initialized && called) {
-      setStackId(drizzle.contracts.RealEstate.methods[method].cacheSend(...methodParams.current));
+      setStackId(drizzle.contracts.SupRealEstate.methods[method].cacheSend(...methodParams.current));
     }
-  }, [initialized, called, method, drizzle.contracts.RealEstate.methods]);
+  }, [initialized, called, method, drizzle.contracts.SupRealEstate.methods]);
 
   const sendTransaction = (...params) => {
     methodParams.current = params.slice();
