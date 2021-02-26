@@ -25,8 +25,7 @@ export default function AddForm({onAdd, loading}) {
     setShowError(false);
     const values = {
       ...formValues,
-      price: +(formValues.price.replace(',', '.')),
-      onSale: true
+      ethPrice: formValues.price.replace(',', '.')
     };
     if (!isFormValid(values)) {
       setShowError(true);

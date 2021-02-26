@@ -7,7 +7,6 @@ export async function uploadMetadataFile(metadataAndFiles) {
     description: metadataAndFiles.description,
     images: pictureHashes,
     address: metadataAndFiles.address,
-    price: metadataAndFiles.price
   });
   return await pinToIPFS(new Blob([metadata], { type: 'application/json' }));
 }

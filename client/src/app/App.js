@@ -22,9 +22,9 @@ function App() {
   return (
     <RealEstatesProvider>
       <Switch>
-        <Route path="/" exact component={HomePage}/>
-        <Route path="/add-token" exact component={AddPage}/>
-        <Redirect to="/"/>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/real-estates/add" exact component={AddPage} />
+        <Redirect to="/" />
       </Switch>
     </RealEstatesProvider>
   );
