@@ -51,4 +51,10 @@ contract SupRealEstate is ERC721 {
     _safeTransfer(tokenOwner, msg.sender, _tokenId, "");
     _tokens[_tokenId].onSale = false;
   }
+
+  function withdrawCommission() external {
+    require(msg.sender == owner, 'Only owner can withdraw commissions.');
+    require(address(this).balance > 0, 'No fund to withdraw at the moment.');
+    owner.transfer(address(this).balance);
+  }
 }
