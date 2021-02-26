@@ -6,8 +6,8 @@ export function useCacheCall(method, ...params) {
   const [dataKey, setDataKey] = useState(null);
   useEffect(() => {
     if (initialized) {
-      setDataKey(drizzle.contracts.RealEstate.methods[method].cacheCall(...params));
+      setDataKey(drizzle.contracts.SupRealEstate.methods[method].cacheCall(...params));
     }
-  }, [initialized, drizzle.contracts.RealEstate.methods, method, params]);
-  return drizzleState.contracts.RealEstate[method][dataKey]?.value ?? null;
+  }, [initialized, drizzle.contracts.SupRealEstate.methods, method, params]);
+  return drizzleState.contracts.SupRealEstate[method][dataKey]?.value ?? null;
 }

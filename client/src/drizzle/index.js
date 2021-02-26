@@ -1,10 +1,10 @@
 import { Drizzle } from '@drizzle/store';
 import { createContext, useContext, useEffect, useState } from 'react';
-import RealEstate from '../contracts/RealEstate.json';
+import SupRealEstate from '../contracts/SupRealEstate.json';
 
 const drizzle = new Drizzle({
   contracts: [
-    RealEstate
+    SupRealEstate
   ],
   web3: {
     fallback: {
