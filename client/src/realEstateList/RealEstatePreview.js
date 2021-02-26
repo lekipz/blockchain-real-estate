@@ -1,12 +1,12 @@
 import classes from './cssModules/RealEstatePreview.module.css'
 
-export default function RealEstatePreview({ realEstate }) {
+const PaddedParagraph = ({children}) => (
+  <p className="pt-3">
+    {children}
+  </p>
+)
 
-  const PaddedParagraph = ({children}) => (
-    <p className="pt-3">
-      {children}
-    </p>
-  )
+export default function RealEstatePreview({ realEstate }) {
 
   return (
     <div className={classes.realEstatePreview}>
