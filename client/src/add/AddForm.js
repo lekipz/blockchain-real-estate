@@ -7,7 +7,7 @@ import { isFormValid } from './service';
 
 let pictureId = 1;
 
-export default function AddForm({onAdd}) {
+export default function AddForm({onAdd, loading}) {
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
@@ -20,17 +20,18 @@ export default function AddForm({onAdd}) {
     [e.target.name]: e.target.value
   }));
   const [showError, setShowError] = useState(false);
-  const [isLoading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
-    setShowError(false);
     e.preventDefault();
-    if (!isFormValid(formValues)) {
+    setShowError(false);
+    const values = {
+      ...formValues,
+      ethPrice: formValues.price.replace(',', '.')
+    };
+    if (!isFormValid(values)) {
       setShowError(true);
       return;
     }
-    setLoading(true);
-    await onAdd(formValues);
-    setLoading(false);
+    await onAdd(values);
   };
   const handleFilesChanged = files => {
     if (files && files.length > 0) {
@@ -90,8 +91,8 @@ export default function AddForm({onAdd}) {
             </div>
           )}
           <div className="flex justify-end">
-            <Button disabled={isLoading}>
-              {isLoading ? 'Création...' : 'Créer'}
+            <Button disabled={loading}>
+              {loading ? 'Création...' : 'Créer'}
             </Button>
           </div>
         </div>
