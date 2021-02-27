@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Button from '../common/ui/Button';
 import { useContractBalance } from './useContractBalance';
-import { formatEth } from './utils';
+import { formatEth } from '../common/utils';
 import { useCacheSend } from '../drizzle/utils/useCacheSend';
 
 const getButtonLabel = (contractBalance, isLoading, isSuccess) => {
