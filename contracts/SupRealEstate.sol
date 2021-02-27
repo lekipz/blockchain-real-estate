@@ -25,8 +25,12 @@ contract SupRealEstate is ERC721 {
     owner = msg.sender;
   }
 
-  function tokenDataOf(uint _tokenId) external view returns (RealEstate memory) {
-    require(_exists(_tokenId), 'Token does not exist.');
+  modifier tokenExists(uint _tokenId) {
+    require(_exists(_tokenId), 'Token does not exists.');
+    _;
+  }
+
+  function tokenDataOf(uint _tokenId) tokenExists(_tokenId) external view returns (RealEstate memory) {
     return _tokens[_tokenId];
   }
 
@@ -39,8 +43,7 @@ contract SupRealEstate is ERC721 {
     return newItemId;
   }
 
-  function buy(uint _tokenId) external payable {
-    require(_exists(_tokenId), 'Token does not exists.');
+  function buy(uint _tokenId) tokenExists(_tokenId) external payable {
     require(ownerOf(_tokenId) != msg.sender, 'Token already owned.');
     require(_tokens[_tokenId].onSale == true, 'Token is not for sale.');
     require(msg.value >= _tokens[_tokenId].weiPrice, 'Not enough ETH has been sent.');
@@ -50,6 +53,11 @@ contract SupRealEstate is ERC721 {
 
     _safeTransfer(tokenOwner, msg.sender, _tokenId, "");
     _tokens[_tokenId].onSale = false;
+  }
+
+  function setOnSale(uint _tokenId, bool _onSale) tokenExists(_tokenId) external {
+    require(ownerOf(_tokenId) == msg.sender, 'Token not owned.');
+    _tokens[_tokenId].onSale = _onSale;
   }
 
   function withdrawCommission() external {
