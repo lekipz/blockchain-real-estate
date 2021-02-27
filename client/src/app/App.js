@@ -23,7 +23,7 @@ function App() {
 
   return (
     <RealEstatesProvider>
-      <Navbar />
+      <Navbar/>
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/real-estates/add" exact component={AddPage} />
