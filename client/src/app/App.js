@@ -5,7 +5,7 @@ import AddPage from '../add/AddPage';
 import HomePage from '../home/HomePage';
 import RealEstatesProvider from '../real-estates';
 import Navbar from '../navbar/Navbar';
-import RealEstateListPage from '../realEstateList/RealEstateListPage';
+import RealEstateListPage from '../real-estates-list/RealEstateListPage';
 
 function App() {
   const { initialized } = useDrizzle();

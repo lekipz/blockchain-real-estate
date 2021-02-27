@@ -5,12 +5,20 @@ export default function RealEstateListPage() {
 
   const realEstates = useRealEstates();
 
-  if(realEstates) {
+  const RealEstatesOnSale = () => (
+    realEstates.map((realEstate) => {
+      if(realEstate.onSale) {
+        return (<RealEstatePreview realEstate={realEstate} key={realEstate.tokenId}/>)
+    }
+  })
+  )
+
+  if(realEstates?.length > 0) {
     return (
       <div className="flex flex-wrap flex-col items-center">
         <h1 className="text-5xl font-bold mt-14">BIENS EN VENTE</h1>
         <div className="flex flex-wrap justify-center mt-28 m-72">
-          {realEstates.map((realEstate) => realEstate ? (<RealEstatePreview realEstate={realEstate} key={realEstate.tokenId}/>): (<p>Chargement des biens...</p>))}
+          <RealEstatesOnSale />
         </div>
       </div>
     )
