@@ -22,12 +22,14 @@ function App() {
 
   return (
     <RealEstatesProvider>
-      <Navbar />
-      <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/real-estates/add" exact component={AddPage} />
-        <Redirect to="/" />
-      </Switch>
+      <Navbar/>
+      <main>
+        <Switch>
+          <Route path="/" exact component={HomePage}/>
+          <Route path="/real-estates/add" exact component={AddPage}/>
+          <Redirect to="/"/>
+        </Switch>
+      </main>
     </RealEstatesProvider>
   );
 }
