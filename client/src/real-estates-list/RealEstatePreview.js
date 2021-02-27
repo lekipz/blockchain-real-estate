@@ -7,23 +7,27 @@ const PaddedParagraph = ({children}) => (
   </p>
 )
 
+const BoldLabel = ({children}) => (
+  <span className="font-bold">{children}</span>
+)
+
 export default function RealEstatePreview({ realEstate }) {
 
-  if(realEstate.description && realEstate.images.length > 0) {
+  if(!realEstate.description && realEstate.images.length > 0) {
     return (
-      <div className={classes.realEstatePreview}>
-        <PaddedParagraph><span className="font-bold">Nom: </span> {realEstate.name}</PaddedParagraph>
-        <PaddedParagraph><span className="font-bold">Description:</span> {realEstate.description.slice(0,150)+'...'}</PaddedParagraph>
-        <PaddedParagraph><span className="font-bold">Prix:</span> {realEstate.price}</PaddedParagraph>
-        <PaddedParagraph><span className="font-bold">Adresse:</span> {realEstate.address}</PaddedParagraph>
-        <img className="object-contain h-40 pt-3" src={realEstate.images[0]}/>
+      <div className={classes.realEstatePreviewLoading}>
+        <Loader visible type="Oval" color="#66C"/>
       </div>
     )
   }
 
   return (
-    <div className={classes.realEstatePreviewLoading}>
-      <Loader visible type="Oval" color="#66C"/>
+    <div className={classes.realEstatePreview}>
+      <PaddedParagraph><BoldLabel>Nom: </BoldLabel> {realEstate.name}</PaddedParagraph>
+      <PaddedParagraph><BoldLabel className="font-bold">Description:</BoldLabel> {realEstate.description.slice(0,150)+'...'}</PaddedParagraph>
+      <PaddedParagraph><BoldLabel className="font-bold">Prix:</BoldLabel> {realEstate.price}</PaddedParagraph>
+      <PaddedParagraph><BoldLabel className="font-bold">Adresse:</BoldLabel> {realEstate.address}</PaddedParagraph>
+      <img className="object-contain h-40 pt-3" src={realEstate.images[0]}/>
     </div>
   )
 }
