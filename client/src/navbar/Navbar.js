@@ -21,7 +21,7 @@ export default function Navbar() {
         <NavbarLink to="/">Accueil</NavbarLink>
         <NavbarLink to="/real-estates">Les biens en vente</NavbarLink>
         <NavbarLink to="/real-estates/add">Ajouter un bien</NavbarLink>
-        <NavbarLink to="/oui">Mes ventes</NavbarLink>
+        <NavbarLink to="/my-sales">Mes ventes</NavbarLink>
       </div>
       <aside>
         {isOwner && <CommissionButton/>}

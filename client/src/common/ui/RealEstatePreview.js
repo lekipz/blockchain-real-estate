@@ -1,4 +1,4 @@
-import classes from './cssModules/RealEstatePreview.module.css'
+import classes from '../../real-estates-list/cssModules/RealEstatePreview.module.css'
 import Loader from "react-loader-spinner";
 
 const PaddedParagraph = ({children}) => (
@@ -13,7 +13,7 @@ const BoldLabel = ({children}) => (
 
 export default function RealEstatePreview({ realEstate }) {
 
-  if(!realEstate.description && realEstate.images.length > 0) {
+  if(!realEstate.description && !realEstate.images) {
     return (
       <div className={classes.realEstatePreviewLoading}>
         <Loader visible type="Oval" color="#66C"/>

@@ -6,6 +6,7 @@ import HomePage from '../home/HomePage';
 import RealEstatesProvider from '../real-estates';
 import Navbar from '../navbar/Navbar';
 import RealEstateListPage from '../real-estates-list/RealEstateListPage';
+import MySalesPage from '../my-sales/MySalesPages';
 
 function App() {
   const { initialized } = useDrizzle();
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" exact component={HomePage}/>
           <Route path="/real-estates/add" exact component={AddPage}/>
           <Route path="/real-estates" exact component={RealEstateListPage}/>
+          <Route path="/my-sales" exact component={MySalesPage}/>
           <Redirect to="/"/>
         </Switch>
       </main>
