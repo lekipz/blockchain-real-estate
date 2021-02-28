@@ -8,6 +8,11 @@ export default function RealEstateDetails({ realEstate, onBuy, loading }) {
     <div className="flex flex-nowrap justify-between">
       <div className={classes.informations}>
         <h2 className="text-3xl mb-2 text-center">{realEstate.name}</h2>
+        {realEstate.isOwned && (
+          <div className="mt-4 mb-3 border rounded border-blue-800 bg-blue-200 p-2">
+            Vous possédez déjà ce bien.
+          </div>
+        )}
         <section className="md:max-w-6xl mx-auto pt-4 px-4">
           <strong>Prix: </strong>
           {realEstate.price ? formatEth(realEstate.price) : 'Chargement...'} ETH

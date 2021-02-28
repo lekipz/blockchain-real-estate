@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useRealEstate } from '../real-estates';
 import ScreenSpinner from '../common/ui/ScreenSpinner';
 import RealEstateDetails from './RealEstateDetails';
@@ -8,15 +7,9 @@ import { useDrizzle } from '../drizzle';
 
 export default function RealEstateDetailsPage() {
   const { id } = useParams();
-  const history = useHistory();
   const realEstate = useRealEstate(+id);
   const { drizzle, drizzleState } = useDrizzle();
   const { sendTransaction: buy, status } = useCacheSend('buy');
-  useEffect(() => {
-    if (status === 'success') {
-      history.push('/');
-    }
-  }, [status]);
 
   if (!realEstate) {
     return <ScreenSpinner label="Chargement du bien..."/>;

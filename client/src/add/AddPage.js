@@ -12,7 +12,7 @@ export default function AddPage() {
   };
   useEffect(() => {
     if (creationStatus === 'success') {
-      history.push('/');
+      history.push('/real-estates');
     }
   }, [creationStatus, history]);
 
