@@ -10,6 +10,7 @@ export function useCacheSend(method) {
   useEffect(() => {
     if (initialized && called) {
       setStackId(drizzle.contracts.SupRealEstate.methods[method].cacheSend(...methodParams.current));
+      setCalled(false);
     }
   }, [initialized, called, method, drizzle.contracts.SupRealEstate.methods]);
 
