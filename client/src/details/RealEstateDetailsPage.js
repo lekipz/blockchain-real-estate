@@ -9,7 +9,8 @@ export default function RealEstateDetailsPage() {
   const { id } = useParams();
   const realEstate = useRealEstate(+id);
   const { drizzle, drizzleState } = useDrizzle();
-  const { sendTransaction: buy, status } = useCacheSend('buy');
+  const { sendTransaction: buy, status: buyStatus } = useCacheSend('buy');
+  const { sendTransaction: setOnSale, status: setOnSaleStatus } = useCacheSend('setOnSale');
 
   if (!realEstate) {
     return <ScreenSpinner label="Chargement du bien..."/>;
@@ -21,12 +22,19 @@ export default function RealEstateDetailsPage() {
       value: drizzle.web3.utils.toWei(realEstate.price.toString())
     });
   };
+  const handleSetOnSale = onSale => {
+    setOnSale(realEstate.tokenId, onSale, {
+      from: drizzleState.accounts[0]
+    });
+  };
 
+  const loading = buyStatus === 'loading' || setOnSaleStatus === 'pending';
   return (
     <div className="px-4">
       <RealEstateDetails realEstate={realEstate}
                          onBuy={handleBuy}
-                         loading={status === 'loading'}/>
+                         onToggleSale={handleSetOnSale}
+                         loading={loading}/>
     </div>
   );
 }
