@@ -1,5 +1,6 @@
 import classes from '../../real-estates-list/cssModules/RealEstatePreview.module.css'
-import Loader from "react-loader-spinner";
+import Loader from 'react-loader-spinner';
+import { useHistory } from 'react-router-dom'
 
 const PaddedParagraph = ({children}) => (
   <p className="pt-3">
@@ -12,6 +13,7 @@ const BoldLabel = ({children}) => (
 )
 
 export default function RealEstatePreview({ realEstate }) {
+  const history = useHistory()
 
   if(!realEstate.description && !realEstate.images) {
     return (
@@ -22,7 +24,7 @@ export default function RealEstatePreview({ realEstate }) {
   }
 
   return (
-    <div className={classes.realEstatePreview}>
+    <div className={classes.realEstatePreview} onClick={() => history.push(`/real-estates/${realEstate.tokenId}`)}>
       <PaddedParagraph><BoldLabel>Nom: </BoldLabel> {realEstate.name}</PaddedParagraph>
       <PaddedParagraph><BoldLabel className="font-bold">Description:</BoldLabel> {realEstate.description.slice(0,150)+'...'}</PaddedParagraph>
       <PaddedParagraph><BoldLabel className="font-bold">Prix:</BoldLabel> {realEstate.price}</PaddedParagraph>
