@@ -10,7 +10,7 @@ export default function RealEstateDetails({ realEstate, onBuy, loading }) {
         <h2 className="text-3xl mb-2 text-center">{realEstate.name}</h2>
         <section className="md:max-w-6xl mx-auto pt-4 px-4">
           <strong>Prix: </strong>
-          {formatEth(realEstate.price)} ETH
+          {realEstate.price ? formatEth(realEstate.price) : 'Chargement...'} ETH
         </section>
         <section className="md:max-w-6xl mx-auto pt-4 px-4">
           <strong>Localisation: </strong>
