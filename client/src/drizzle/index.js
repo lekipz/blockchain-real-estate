@@ -12,16 +12,16 @@ const drizzle = new Drizzle({
       url: 'ws://127.0.0.1:7545'
     }
   }
-})
+});
 
 const DrizzleContext = createContext(null);
 
 const DrizzleProvider = ({ children }) => {
   const [drizzleState, setDrizzleState] = useState(drizzle.store.getState());
   useEffect(() => {
-    return drizzle.store.subscribe(() =>
-      setDrizzleState(drizzle.store.getState())
-    );
+    drizzle.store.subscribe(() => {
+      setDrizzleState(drizzle.store.getState());
+    });
   }, []);
   const initialized = drizzleState.drizzleStatus.initialized;
 
@@ -42,6 +42,6 @@ export const useDrizzle = () => {
   return {
     drizzle: context.drizzle,
     drizzleState: context.drizzleState,
-    initialized: context.initialized,
-  }
+    initialized: context.initialized
+  };
 };

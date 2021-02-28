@@ -10,9 +10,9 @@ export default function RealEstateListPage() {
   }
 
   return (
-    <div className="flex flex-wrap flex-col items-center">
-      <h1 className="text-5xl font-bold mt-14">BIENS EN VENTE</h1>
-      <div className="flex flex-wrap justify-center mt-28 m-72">
+    <div className="flex flex-wrap flex-col items-center mt-8">
+      <h1 className="text-5xl font-bold">Biens en vente</h1>
+      <div className="flex flex-wrap justify-center mt-14 mx-20">
         {
           realEstates.filter(re => !!re?.onSale).map(re => (<RealEstatePreview realEstate={re} key={re.tokenId}/>))
         }

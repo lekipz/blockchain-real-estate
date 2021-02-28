@@ -8,6 +8,6 @@ export function useCacheCall(method, ...params) {
     if (initialized) {
       setDataKey(drizzle.contracts.SupRealEstate.methods[method].cacheCall(...params));
     }
-  }, [initialized, drizzle.contracts.SupRealEstate.methods, method, params]);
+  }, [initialized, method, JSON.stringify(params)]);
   return drizzleState.contracts.SupRealEstate[method][dataKey]?.value ?? null;
 }
