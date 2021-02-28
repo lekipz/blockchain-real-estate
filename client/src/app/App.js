@@ -6,6 +6,7 @@ import RealEstatesProvider from '../real-estates';
 import Navbar from '../navbar/Navbar';
 import AddPage from '../add/AddPage';
 import ScreenSpinner from '../common/ui/ScreenSpinner';
+import RealEstateListPage from '../real-estates-list/RealEstateListPage';
 
 function App() {
   const { initialized } = useDrizzle();
@@ -21,6 +22,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomePage}/>
           <Route path="/real-estates/add" exact component={AddPage}/>
+          <Route path="/real-estates" exact component={RealEstateListPage}/>
           <Route path="/real-estates/:id" exact component={RealEstateDetailsPage}/>
           <Redirect to="/"/>
         </Switch>
