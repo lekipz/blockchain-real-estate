@@ -1,7 +1,6 @@
 import { useDrizzle } from '../drizzle';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import RealEstateDetailsPage from '../details/RealEstateDetailsPage';
-import HomePage from '../home/HomePage';
 import RealEstatesProvider from '../real-estates';
 import Navbar from '../navbar/Navbar';
 import AddPage from '../add/AddPage';
@@ -21,12 +20,11 @@ function App() {
       <Navbar/>
       <main>
         <Switch>
-          <Route path="/" exact component={HomePage}/>
           <Route path="/real-estates/add" exact component={AddPage}/>
           <Route path="/real-estates" exact component={RealEstateListPage}/>
           <Route path="/my-sales" exact component={MySalesPage}/>
           <Route path="/real-estates/:id" exact component={RealEstateDetailsPage}/>
-          <Redirect to="/"/>
+          <Redirect to="/real-estates"/>
         </Switch>
       </main>
     </RealEstatesProvider>

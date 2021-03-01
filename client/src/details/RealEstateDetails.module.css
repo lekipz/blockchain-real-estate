@@ -1,3 +1,4 @@
 .informations {
+  @apply px-4;
   flex: 1 0 50%;
 }
