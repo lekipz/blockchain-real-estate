@@ -1,4 +1,4 @@
-import classes from '../../real-estates-list/cssModules/RealEstatePreview.module.css'
+import classes from './RealEstatePreview.module.css'
 import Loader from 'react-loader-spinner';
 import { useHistory } from 'react-router-dom'
 

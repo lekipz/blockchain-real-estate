@@ -11,8 +11,8 @@ export default function RealEstateListPage() {
 
   return (
     <div className="flex flex-wrap flex-col items-center">
-      <h1 className="text-5xl font-bold mt-14">BIENS EN VENTE</h1>
-      <RealEstateList reList={realEstates.filter(re => !!re?.onSale)}/>
+      <h1 className="text-5xl font-bold mt-14">Biens en vente</h1>
+      <RealEstateList realEstates={realEstates.filter(re => !!re?.onSale)}/>
     </div>
   )
 }
