@@ -1,5 +1,5 @@
-import RealEstatePreview from "./RealEstatePreview";
 import { useRealEstates } from "../real-estates";
+import RealEstateList from "../common/ui/RealEstateList";
 
 export default function RealEstateListPage() {
 
@@ -10,13 +10,9 @@ export default function RealEstateListPage() {
   }
 
   return (
-    <div className="flex flex-wrap flex-col items-center mt-8">
-      <h1 className="text-5xl font-bold">Biens en vente</h1>
-      <div className="flex flex-wrap justify-center mt-14 mx-20">
-        {
-          realEstates.filter(re => !!re?.onSale).map(re => (<RealEstatePreview realEstate={re} key={re.tokenId}/>))
-        }
-      </div>
+    <div className="flex flex-wrap flex-col items-center">
+      <h1 className="text-5xl font-bold mt-14">Biens en vente</h1>
+      <RealEstateList realEstates={realEstates.filter(re => !!re?.onSale)}/>
     </div>
   )
 }

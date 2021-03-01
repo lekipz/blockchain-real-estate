@@ -1,6 +1,7 @@
-import classes from './cssModules/RealEstatePreview.module.css';
+import classes from './RealEstatePreview.module.css';
 import Loader from 'react-loader-spinner';
-import { formatEth } from '../common/utils';
+import { formatEth } from '../utils';
+import { useHistory } from 'react-router-dom';
 
 const PaddedParagraph = ({ children }) => (
   <p className="pt-3">
@@ -13,8 +14,10 @@ const BoldLabel = ({ children }) => (
 );
 
 export default function RealEstatePreview({ realEstate }) {
+  const history = useHistory()
+
   return (
-    <div className={classes.realEstatePreview}>
+    <div className={classes.realEstatePreview} onClick={() => history.push(`/real-estates/${realEstate.tokenId}`)}>
       <PaddedParagraph>
         <BoldLabel>Nom : </BoldLabel>
         {realEstate.name}
